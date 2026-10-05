@@ -2,1000 +2,927 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08090d">
-<meta name="description" content="SayIt — Speak. Transform. Create.">
 <title>SayIt — Speak. Transform. Create.</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-    --bg:#08090d;
-    --card:#11131a;
-    --card2:#171923;
-    --border:#252938;
-    --text:#f5f7fb;
-    --muted:#969cac;
-    --accent:#7c5cff;
-    --accent2:#9b7cff;
-    --danger:#ff5571;
-    --success:#37d996;
+--bg:#08090d;
+--panel:#11131a;
+--panel2:#171a23;
+--border:#272b38;
+--text:#f7f8fb;
+--muted:#969cab;
+--accent:#7c5cff;
+--accent2:#a07dff;
+--green:#38d996;
 }
 
 body{
-    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%,rgba(124,92,255,.20),transparent 35%),
-        var(--bg);
-    color:var(--text);
-    min-height:100vh;
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:
+radial-gradient(circle at 50% -10%,rgba(124,92,255,.22),transparent 38%),
+var(--bg);
+color:var(--text);
+min-height:100vh;
 }
 
-button,
-select,
-textarea,
-input{
-    font:inherit;
-}
+button,select,textarea,input{font:inherit}
 
-button{
-    cursor:pointer;
-}
-
-.app{
-    min-height:100vh;
-}
-
-/* HEADER */
+button{cursor:pointer}
 
 header{
-    height:68px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
-    border-bottom:1px solid var(--border);
-    background:rgba(8,9,13,.88);
-    backdrop-filter:blur(18px);
-    position:sticky;
-    top:0;
-    z-index:100;
+height:68px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+border-bottom:1px solid var(--border);
+background:rgba(8,9,13,.9);
+backdrop-filter:blur(18px);
+position:sticky;
+top:0;
+z-index:20;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:21px;
-    font-weight:800;
-    letter-spacing:-.5px;
+display:flex;
+align-items:center;
+gap:10px;
+font-size:21px;
+font-weight:800;
 }
 
-.logo-mark{
-    width:34px;
-    height:34px;
-    border-radius:11px;
-    background:linear-gradient(135deg,#7c5cff,#a477ff);
-    display:grid;
-    place-items:center;
-    box-shadow:0 8px 30px rgba(124,92,255,.3);
+.logoMark{
+width:35px;
+height:35px;
+border-radius:11px;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#7c5cff,#a47fff);
+box-shadow:0 10px 30px rgba(124,92,255,.3);
 }
 
-.logo-mark span{
-    font-size:17px;
-    font-weight:900;
+.online{
+font-size:11px;
+color:var(--muted);
+display:flex;
+align-items:center;
+gap:7px;
 }
 
-.status{
-    display:flex;
-    align-items:center;
-    gap:7px;
-    color:var(--muted);
-    font-size:12px;
+.online i{
+width:7px;
+height:7px;
+border-radius:50%;
+background:var(--green);
+display:block;
 }
-
-.status-dot{
-    width:7px;
-    height:7px;
-    background:var(--success);
-    border-radius:50%;
-}
-
-/* NAVIGATION */
 
 nav{
-    display:flex;
-    gap:5px;
-    overflow-x:auto;
-    padding:10px 14px;
-    border-bottom:1px solid var(--border);
-    background:#0b0c11;
-    scrollbar-width:none;
+display:flex;
+gap:5px;
+overflow-x:auto;
+padding:10px 14px;
+background:#0b0c11;
+border-bottom:1px solid var(--border);
+scrollbar-width:none;
 }
 
-nav::-webkit-scrollbar{
-    display:none;
+nav::-webkit-scrollbar{display:none}
+
+nav button{
+border:0;
+background:transparent;
+color:var(--muted);
+padding:9px 13px;
+border-radius:9px;
+white-space:nowrap;
+font-size:13px;
 }
 
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    padding:9px 13px;
-    border-radius:9px;
-    white-space:nowrap;
-    font-size:13px;
+nav button.active,
+nav button:hover{
+background:#191c26;
+color:white;
 }
-
-.nav-btn:hover,
-.nav-btn.active{
-    color:white;
-    background:#191b25;
-}
-
-/* MAIN */
 
 main{
-    max-width:1180px;
-    margin:auto;
-    padding:45px 20px 80px;
+max-width:1200px;
+margin:auto;
+padding:35px 16px 80px;
 }
 
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-/* HOME */
+.page{display:none}
+.page.active{display:block}
 
 .hero{
-    text-align:center;
-    max-width:850px;
-    margin:25px auto 60px;
+text-align:center;
+max-width:850px;
+margin:30px auto 50px;
 }
 
-.hero-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 13px;
-    border:1px solid var(--border);
-    border-radius:999px;
-    color:#c9c1ff;
-    background:rgba(124,92,255,.08);
-    font-size:12px;
-    margin-bottom:22px;
+.badge{
+display:inline-flex;
+padding:8px 13px;
+border:1px solid var(--border);
+border-radius:30px;
+background:rgba(124,92,255,.08);
+color:#c9bfff;
+font-size:12px;
+margin-bottom:20px;
 }
 
 .hero h1{
-    font-size:clamp(43px,9vw,76px);
-    line-height:.98;
-    letter-spacing:-4px;
-    margin-bottom:22px;
+font-size:clamp(42px,9vw,76px);
+line-height:1;
+letter-spacing:-4px;
+margin-bottom:20px;
 }
 
 .gradient{
-    background:linear-gradient(90deg,#fff,#a990ff,#7c5cff);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
+background:linear-gradient(90deg,#fff,#b7a4ff,#7c5cff);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 
 .hero p{
-    max-width:650px;
-    margin:auto;
-    color:var(--muted);
-    line-height:1.7;
-    font-size:16px;
+color:var(--muted);
+line-height:1.7;
+max-width:650px;
+margin:auto;
 }
 
-.hero-actions{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    margin-top:30px;
-    flex-wrap:wrap;
+.actions{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:27px;
 }
 
-.primary-btn,
-.secondary-btn{
-    border:0;
-    border-radius:12px;
-    padding:13px 20px;
-    font-weight:700;
+.primary,
+.secondary{
+padding:13px 19px;
+border-radius:11px;
+font-weight:700;
+border:0;
 }
 
-.primary-btn{
-    background:linear-gradient(135deg,#7c5cff,#9b76ff);
-    color:white;
-    box-shadow:0 12px 35px rgba(124,92,255,.22);
+.primary{
+background:linear-gradient(135deg,#7c5cff,#9b76ff);
+color:white;
 }
 
-.secondary-btn{
-    background:#171923;
-    color:white;
-    border:1px solid var(--border);
+.secondary{
+background:#171923;
+color:white;
+border:1px solid var(--border);
 }
 
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
 }
 
-.feature{
-    padding:23px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
+.card{
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:18px;
+padding:21px;
 }
 
-.feature-icon{
-    width:42px;
-    height:42px;
-    display:grid;
-    place-items:center;
-    border-radius:12px;
-    background:#1b1d29;
-    margin-bottom:17px;
-    font-size:19px;
+.cardIcon{
+font-size:21px;
+margin-bottom:15px;
 }
 
-.feature h3{
-    margin-bottom:8px;
-    font-size:16px;
+.card h3{
+font-size:16px;
+margin-bottom:7px;
 }
 
-.feature p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.6;
+.card p{
+font-size:13px;
+line-height:1.6;
+color:var(--muted);
 }
 
-/* SECTION */
-
-.section-head{
-    margin-bottom:25px;
+.heading{
+margin-bottom:22px;
 }
 
-.section-head h2{
-    font-size:30px;
-    letter-spacing:-1px;
+.heading h2{
+font-size:30px;
+letter-spacing:-1px;
 }
 
-.section-head p{
-    color:var(--muted);
-    margin-top:7px;
-    font-size:14px;
+.heading p{
+color:var(--muted);
+font-size:14px;
+margin-top:6px;
 }
 
 /* VOICE STUDIO */
 
 .studio{
-    display:grid;
-    grid-template-columns:1.25fr .75fr;
-    gap:18px;
+display:grid;
+grid-template-columns:1.25fr .75fr;
+gap:16px;
 }
 
 .panel{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:19px;
+padding:18px;
 }
 
-.panel-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
+.panelHead{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:15px;
 }
 
-.panel-title h3{
-    font-size:16px;
+.panelHead h3{
+font-size:15px;
 }
 
-.panel-title span{
-    color:var(--muted);
-    font-size:11px;
+.panelHead span{
+font-size:11px;
+color:var(--muted);
 }
 
 textarea{
-    width:100%;
-    min-height:260px;
-    resize:vertical;
-    background:#0b0d12;
-    color:white;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:17px;
-    outline:none;
-    line-height:1.6;
+width:100%;
+min-height:280px;
+resize:vertical;
+border:1px solid var(--border);
+border-radius:14px;
+background:#0b0d12;
+color:white;
+padding:16px;
+outline:none;
+line-height:1.65;
 }
 
 textarea:focus{
-    border-color:#5d47c7;
+border-color:#654fd1;
 }
 
-.text-tools{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:10px;
-    color:var(--muted);
-    font-size:11px;
+.textBottom{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin-top:10px;
+font-size:11px;
+color:var(--muted);
 }
 
-.mic-btn{
-    border:1px solid var(--border);
-    background:#171923;
-    color:white;
-    border-radius:10px;
-    padding:8px 12px;
+.mic{
+border:1px solid var(--border);
+background:#181b24;
+color:white;
+padding:8px 12px;
+border-radius:9px;
 }
 
 .controls{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:11px;
 }
 
-.control{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+.field{
+display:flex;
+flex-direction:column;
+gap:7px;
 }
 
-.control.full{
-    grid-column:1/-1;
+.field.full{
+grid-column:1/-1;
 }
 
-.control label{
-    color:var(--muted);
-    font-size:11px;
+.field label{
+font-size:11px;
+color:var(--muted);
 }
 
 select{
-    width:100%;
-    background:#0b0d12;
-    color:white;
-    border:1px solid var(--border);
-    border-radius:11px;
-    padding:12px;
-    outline:none;
+width:100%;
+padding:11px;
+border-radius:10px;
+border:1px solid var(--border);
+background:#0b0d12;
+color:white;
+outline:none;
 }
 
-.voice-card{
-    padding:15px;
-    border:1px solid var(--border);
-    background:#0c0e14;
-    border-radius:14px;
-    margin-bottom:14px;
+.voicePreview{
+display:flex;
+align-items:center;
+gap:12px;
+padding:13px;
+margin-top:15px;
+border-radius:13px;
+border:1px solid var(--border);
+background:#0c0e14;
 }
 
-.voice-card-top{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:linear-gradient(135deg,#27233f,#604bb0);
 }
 
-.voice-avatar{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:linear-gradient(135deg,#27233d,#5c46a5);
+.voiceInfo{
+flex:1;
 }
 
-.voice-info{
-    flex:1;
+.voiceInfo strong{
+font-size:13px;
+display:block;
 }
 
-.voice-info strong{
-    display:block;
-    font-size:14px;
+.voiceInfo small{
+font-size:10px;
+color:var(--muted);
 }
 
-.voice-info small{
-    color:var(--muted);
-    font-size:11px;
+.preview{
+width:35px;
+height:35px;
+border:0;
+border-radius:50%;
+background:#242836;
+color:white;
 }
 
-.play-btn{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    border:0;
-    background:#242735;
-    color:white;
+.slider{
+margin-top:18px;
 }
 
-.range-wrap{
-    margin-top:20px;
+.sliderTop{
+display:flex;
+justify-content:space-between;
+font-size:11px;
+color:var(--muted);
+margin-bottom:8px;
 }
 
-.range-head{
-    display:flex;
-    justify-content:space-between;
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:10px;
-}
-
-input[type="range"]{
-    width:100%;
-    accent-color:var(--accent);
+input[type=range]{
+width:100%;
+accent-color:var(--accent);
 }
 
 .generate{
-    width:100%;
-    margin-top:18px;
-    padding:14px;
-    border:0;
-    border-radius:12px;
-    color:white;
-    font-weight:800;
-    background:linear-gradient(135deg,#7c5cff,#9a74ff);
+width:100%;
+margin-top:18px;
+padding:14px;
+border:0;
+border-radius:11px;
+font-weight:800;
+color:white;
+background:linear-gradient(135deg,#7c5cff,#9b76ff);
 }
 
-.engine-status{
-    margin-top:12px;
-    padding:11px 12px;
-    border-radius:10px;
-    background:#10121a;
-    color:#8e93a3;
-    font-size:11px;
-    line-height:1.5;
+.engine{
+margin-top:11px;
+padding:10px 11px;
+border-radius:9px;
+background:#0d1017;
+color:#878d9d;
+font-size:10px;
+line-height:1.5;
 }
 
-/* FEATURE PAGES */
-
-.coming{
-    min-height:400px;
-    display:grid;
-    place-items:center;
-    text-align:center;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:30px;
+.result{
+margin-top:15px;
+padding:15px;
+border-radius:13px;
+border:1px dashed #343847;
+background:#0d1016;
+display:none;
 }
 
-.coming-icon{
-    width:70px;
-    height:70px;
-    border-radius:20px;
-    display:grid;
-    place-items:center;
-    margin:0 auto 20px;
-    background:#191b27;
-    font-size:28px;
+.result.show{display:block}
+
+.resultTitle{
+font-size:12px;
+font-weight:700;
+margin-bottom:6px;
 }
 
-.coming h2{
-    margin-bottom:10px;
+.resultText{
+font-size:11px;
+color:var(--muted);
+line-height:1.5;
 }
 
-.coming p{
-    max-width:500px;
-    color:var(--muted);
-    line-height:1.7;
+/* OTHER PAGES */
+
+.placeholder{
+min-height:390px;
+display:grid;
+place-items:center;
+text-align:center;
+padding:30px;
+background:var(--panel);
+border:1px solid var(--border);
+border-radius:20px;
 }
 
-/* TOAST */
+.placeholderIcon{
+font-size:32px;
+margin-bottom:18px;
+}
+
+.placeholder h2{
+margin-bottom:8px;
+}
+
+.placeholder p{
+max-width:550px;
+color:var(--muted);
+line-height:1.7;
+font-size:14px;
+}
 
 .toast{
-    position:fixed;
-    bottom:22px;
-    left:50%;
-    transform:translateX(-50%) translateY(20px);
-    background:#171923;
-    border:1px solid var(--border);
-    color:white;
-    padding:12px 17px;
-    border-radius:10px;
-    font-size:12px;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:300;
+position:fixed;
+left:50%;
+bottom:22px;
+transform:translate(-50%,20px);
+opacity:0;
+pointer-events:none;
+background:#191c26;
+border:1px solid var(--border);
+padding:11px 15px;
+border-radius:10px;
+font-size:12px;
+z-index:50;
+transition:.25s;
 }
 
 .toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+opacity:1;
+transform:translate(-50%,0);
 }
 
-/* MOBILE */
-
 @media(max-width:800px){
-    header{
-        padding:0 15px;
-    }
+header{padding:0 14px}
+.online{display:none}
 
-    .status{
-        display:none;
-    }
+main{padding:28px 13px 60px}
 
-    main{
-        padding:32px 14px 70px;
-    }
+.hero h1{letter-spacing:-2.5px}
 
-    .hero{
-        margin:15px auto 40px;
-    }
+.grid,
+.studio{
+grid-template-columns:1fr;
+}
 
-    .hero h1{
-        letter-spacing:-2.5px;
-    }
+.controls{
+grid-template-columns:1fr;
+}
 
-    .feature-grid,
-    .studio{
-        grid-template-columns:1fr;
-    }
+.field.full{
+grid-column:auto;
+}
 
-    .controls{
-        grid-template-columns:1fr;
-    }
-
-    .control.full{
-        grid-column:auto;
-    }
-
-    textarea{
-        min-height:220px;
-    }
+textarea{
+min-height:230px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
 <header>
-    <div class="logo">
-        <div class="logo-mark"><span>S</span></div>
-        SayIt
-    </div>
 
-    <div class="status">
-        <span class="status-dot"></span>
-        Platform online
-    </div>
+<div class="logo">
+<div class="logoMark">S</div>
+SayIt
+</div>
+
+<div class="online">
+<i></i>
+Platform online
+</div>
+
 </header>
 
 <nav>
-    <button class="nav-btn active" data-page="home">Home</button>
-    <button class="nav-btn" data-page="studio">Voice Studio</button>
-    <button class="nav-btn" data-page="video">Video</button>
-    <button class="nav-btn" data-page="translate">Translate</button>
-    <button class="nav-btn" data-page="library">Voice Library</button>
-    <button class="nav-btn" data-page="creations">My Creations</button>
+
+<button class="active" data-page="home">Home</button>
+<button data-page="studio">Voice Studio</button>
+<button data-page="video">Video</button>
+<button data-page="translate">Translate</button>
+<button data-page="library">Voice Library</button>
+<button data-page="creations">My Creations</button>
+
 </nav>
 
 <main>
 
 <!-- HOME -->
 
-<section class="page active" id="home">
+<section id="home" class="page active">
 
-    <div class="hero">
+<div class="hero">
 
-        <div class="hero-badge">
-            <span>●</span>
-            SayIt — Speak. Transform. Create.
-        </div>
+<div class="badge">
+🌍 Built for global communication
+</div>
 
-        <h1>
-            Your voice.<br>
-            <span class="gradient">Your way.</span>
-        </h1>
+<h1>
+Speak.<br>
+<span class="gradient">Transform. Create.</span>
+</h1>
 
-        <p>
-            A new voice and media platform for speaking, translating,
-            transforming and creating natural audio and video experiences.
-        </p>
+<p>
+SayIt is a global voice and media platform designed for
+speech, translation, voice transformation and real video experiences.
+</p>
 
-        <div class="hero-actions">
-            <button class="primary-btn" onclick="openPage('studio')">
-                Open Voice Studio
-            </button>
+<div class="actions">
 
-            <button class="secondary-btn" onclick="openPage('video')">
-                Video Translator
-            </button>
-        </div>
+<button class="primary" onclick="openPage('studio')">
+Open Voice Studio
+</button>
 
-    </div>
+<button class="secondary" onclick="openPage('video')">
+Video Translator
+</button>
 
-    <div class="feature-grid">
+</div>
 
-        <div class="feature">
-            <div class="feature-icon">🎙</div>
-            <h3>Voice Studio</h3>
-            <p>
-                Write or speak, choose your language, voice and style,
-                then create natural speech.
-            </p>
-        </div>
+</div>
 
-        <div class="feature">
-            <div class="feature-icon">🎬</div>
-            <h3>Video Translator</h3>
-            <p>
-                Translate real videos while preserving the original
-                video, movement and visual experience.
-            </p>
-        </div>
+<div class="grid">
 
-        <div class="feature">
-            <div class="feature-icon">🌍</div>
-            <h3>Voice Library</h3>
-            <p>
-                Explore voices by language, region, gender, age and
-                speaking style.
-            </p>
-        </div>
+<div class="card">
+<div class="cardIcon">🎙️</div>
+<h3>Voice Studio</h3>
+<p>
+Create natural speech with different languages, regions,
+voices, genders, styles and speaking speeds.
+</p>
+</div>
 
-    </div>
+<div class="card">
+<div class="cardIcon">🎬</div>
+<h3>Real Video Translator</h3>
+<p>
+Translate real videos while keeping the original video as
+the visual source.
+</p>
+</div>
+
+<div class="card">
+<div class="cardIcon">🌍</div>
+<h3>Global Voices</h3>
+<p>
+Build a voice library covering languages and regional
+speaking styles around the world.
+</p>
+</div>
+
+</div>
 
 </section>
 
 
 <!-- VOICE STUDIO -->
 
-<section class="page" id="studio">
+<section id="studio" class="page">
 
-    <div class="section-head">
-        <h2>Voice Studio</h2>
-        <p>Create speech from text or use your microphone.</p>
-    </div>
+<div class="heading">
+<h2>Voice Studio</h2>
+<p>Prepare speech with the language, voice and delivery you want.</p>
+</div>
 
-    <div class="studio">
+<div class="studio">
 
-        <div class="panel">
+<div class="panel">
 
-            <div class="panel-title">
-                <h3>Your script</h3>
-                <span id="counter">0 / 5000</span>
-            </div>
+<div class="panelHead">
+<h3>Your message</h3>
+<span id="count">0 / 5000</span>
+</div>
 
-            <textarea
-                id="script"
-                maxlength="5000"
-                placeholder="Type what you want the voice to say..."
-            ></textarea>
+<textarea
+id="text"
+maxlength="5000"
+placeholder="Type what you want SayIt to say..."
+></textarea>
 
-            <div class="text-tools">
-                <span>Write naturally. Add punctuation for better pacing.</span>
-                <button class="mic-btn" id="micBtn">🎙 Speak</button>
-            </div>
+<div class="textBottom">
 
-        </div>
+<span>Use punctuation to control natural pauses.</span>
+
+<button class="mic" id="mic">
+🎙 Speak
+</button>
+
+</div>
+
+</div>
 
 
-        <div class="panel">
+<div class="panel">
 
-            <div class="panel-title">
-                <h3>Voice settings</h3>
-                <span>Studio</span>
-            </div>
+<div class="panelHead">
+<h3>Voice settings</h3>
+<span>Global</span>
+</div>
 
-            <div class="controls">
+<div class="controls">
 
-                <div class="control">
-                    <label>Language</label>
-                    <select id="language">
-                        <option>English</option>
-                        <option>Spanish</option>
-                        <option>French</option>
-                        <option>Portuguese</option>
-                        <option>German</option>
-                        <option>Italian</option>
-                        <option>Arabic</option>
-                        <option>Chinese</option>
-                        <option>Japanese</option>
-                        <option>Korean</option>
-                        <option>Yoruba</option>
-                        <option>Igbo</option>
-                        <option>Hausa</option>
-                    </select>
-                </div>
+<div class="field">
+<label>Source language</label>
 
-                <div class="control">
-                    <label>Region / Accent</label>
-                    <select>
-                        <option>Neutral</option>
-                        <option>American</option>
-                        <option>British</option>
-                        <option>Nigerian</option>
-                        <option>Australian</option>
-                        <option>Canadian</option>
-                        <option>Irish</option>
-                        <option>South African</option>
-                        <option>Latin American</option>
-                    </select>
-                </div>
+<select id="sourceLanguage">
 
-                <div class="control">
-                    <label>Gender</label>
-                    <select>
-                        <option>Male</option>
-                        <option>Female</option>
-                    </select>
-                </div>
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+<option>Portuguese</option>
+<option>German</option>
+<option>Italian</option>
+<option>Dutch</option>
+<option>Arabic</option>
+<option>Chinese</option>
+<option>Japanese</option>
+<option>Korean</option>
+<option>Hindi</option>
+<option>Russian</option>
+<option>Turkish</option>
+<option>Swahili</option>
+<option>Yoruba</option>
+<option>Igbo</option>
+<option>Hausa</option>
 
-                <div class="control">
-                    <label>Voice style</label>
-                    <select>
-                        <option>Natural</option>
-                        <option>Friendly</option>
-                        <option>Professional</option>
-                        <option>Calm</option>
-                        <option>Excited</option>
-                        <option>Warm</option>
-                        <option>Deep</option>
-                        <option>Narration</option>
-                    </select>
-                </div>
+</select>
+</div>
 
-                <div class="control full">
-                    <label>Voice</label>
-                    <select>
-                        <option>SayIt Natural — Male</option>
-                        <option>SayIt Natural — Female</option>
-                        <option>SayIt Warm — Male</option>
-                        <option>SayIt Warm — Female</option>
-                        <option>SayIt Professional — Male</option>
-                        <option>SayIt Professional — Female</option>
-                    </select>
-                </div>
 
-            </div>
+<div class="field">
+<label>Output language</label>
 
-            <div class="range-wrap">
+<select id="targetLanguage">
 
-                <div class="range-head">
-                    <span>Speaking speed</span>
-                    <span id="speedValue">1.0×</span>
-                </div>
+<option>English</option>
+<option>Spanish</option>
+<option>French</option>
+<option>Portuguese</option>
+<option>German</option>
+<option>Italian</option>
+<option>Dutch</option>
+<option>Arabic</option>
+<option>Chinese</option>
+<option>Japanese</option>
+<option>Korean</option>
+<option>Hindi</option>
+<option>Russian</option>
+<option>Turkish</option>
+<option>Swahili</option>
+<option>Yoruba</option>
+<option>Igbo</option>
+<option>Hausa</option>
 
-                <input
-                    type="range"
-                    id="speed"
-                    min="0.7"
-                    max="1.3"
-                    step="0.1"
-                    value="1"
-                >
+</select>
+</div>
 
-            </div>
 
-            <button class="generate" id="generateBtn">
-                Create Voice
-            </button>
+<div class="field">
+<label>Gender</label>
 
-            <div class="engine-status">
-                <strong>Voice engine:</strong>
-                Interface ready. The real free voice engine will be
-                connected in the next stage. No paid API is being used.
-            </div>
+<select>
+<option>Male</option>
+<option>Female</option>
+</select>
+</div>
 
-        </div>
 
-    </div>
+<div class="field">
+<label>Region / accent</label>
+
+<select>
+<option>Neutral</option>
+<option>American</option>
+<option>British</option>
+<option>Nigerian</option>
+<option>Canadian</option>
+<option>Australian</option>
+<option>Irish</option>
+<option>South African</option>
+<option>Latin American</option>
+<option>European Spanish</option>
+<option>Brazilian Portuguese</option>
+</select>
+</div>
+
+
+<div class="field full">
+<label>Voice</label>
+
+<select id="voice">
+
+<option>SayIt Natural — Male</option>
+<option>SayIt Natural — Female</option>
+<option>SayIt Warm — Male</option>
+<option>SayIt Warm — Female</option>
+<option>SayIt Professional — Male</option>
+<option>SayIt Professional — Female</option>
+<option>SayIt Calm — Male</option>
+<option>SayIt Calm — Female</option>
+
+</select>
+</div>
+
+
+<div class="field full">
+<label>Speaking style</label>
+
+<select>
+<option>Natural</option>
+<option>Friendly</option>
+<option>Professional</option>
+<option>Calm</option>
+<option>Excited</option>
+<option>Warm</option>
+<option>Deep</option>
+<option>Narration</option>
+<option>News</option>
+<option>Storytelling</option>
+</select>
+</div>
+
+</div>
+
+
+<div class="slider">
+
+<div class="sliderTop">
+<span>Speaking speed</span>
+<strong id="speedText">1.0×</strong>
+</div>
+
+<input
+id="speed"
+type="range"
+min="0.7"
+max="1.3"
+step="0.1"
+value="1"
+>
+
+</div>
+
+
+<div class="slider">
+
+<div class="sliderTop">
+<span>Pitch</span>
+<strong id="pitchText">0</strong>
+</div>
+
+<input
+id="pitch"
+type="range"
+min="-5"
+max="5"
+step="1"
+value="0"
+>
+
+</div>
+
+
+<div class="voicePreview">
+
+<div class="avatar">S</div>
+
+<div class="voiceInfo">
+<strong id="voiceName">SayIt Natural — Male</strong>
+<small>Voice preview</small>
+</div>
+
+<button class="preview" id="preview">▶</button>
+
+</div>
+
+
+<button class="generate" id="generate">
+Create Voice
+</button>
+
+<div class="engine">
+
+<strong>Voice engine status:</strong>
+Interface ready. The actual speech engine will be connected
+after we select the free/open-source speech technology.
+No paid API is being used.
+
+</div>
+
+
+<div class="result" id="result">
+
+<div class="resultTitle">
+Creation ready for engine
+</div>
+
+<div class="resultText" id="resultText"></div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 
 <!-- VIDEO -->
 
-<section class="page" id="video">
+<section id="video" class="page">
 
-    <div class="section-head">
-        <h2>Video Translator</h2>
-        <p>Translate and dub real video while keeping the original visual experience.</p>
-    </div>
+<div class="heading">
+<h2>Video Translator</h2>
+<p>Translate real video while preserving the original visual footage.</p>
+</div>
 
-    <div class="coming">
+<div class="placeholder">
 
-        <div>
-            <div class="coming-icon">🎬</div>
+<div>
+<div class="placeholderIcon">🎬</div>
 
-            <h2>Real Video Translation</h2>
+<h2>Real Video Translation</h2>
 
-            <p>
-                This section will handle real uploaded videos, speech
-                recognition, translation, dubbing and optional lip-sync.
-                The original video will remain the visual source.
-            </p>
+<p>
+Upload a real video, detect the speech, translate it,
+generate the target voice and create the translated version.
+Optional lip-sync can be added later.
+</p>
 
-            <button class="primary-btn" style="margin-top:22px;">
-                Video Engine — Next Stage
-            </button>
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
 <!-- TRANSLATE -->
 
-<section class="page" id="translate">
+<section id="translate" class="page">
 
-    <div class="section-head">
-        <h2>Translation</h2>
-        <p>Move your message from one language to another.</p>
-    </div>
+<div class="heading">
+<h2>Translation</h2>
+<p>Translate text or speech between supported languages.</p>
+</div>
 
-    <div class="coming">
+<div class="placeholder">
 
-        <div>
-            <div class="coming-icon">🌍</div>
+<div>
+<div class="placeholderIcon">🌍</div>
 
-            <h2>Translation Studio</h2>
+<h2>Translation Studio</h2>
 
-            <p>
-                Type or speak your message, select the target language
-                and prepare it for natural voice output.
-            </p>
+<p>
+The translation engine will connect to the same language
+system used by Voice Studio.
+</p>
 
-            <button class="primary-btn" style="margin-top:22px;">
-                Translation Engine — Next Stage
-            </button>
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
 
 <!-- LIBRARY -->
 
-<section class="page" id="library">
+<section id="library" class="page">
 
-    <div class="section-head">
-        <h2>Voice Library</h2>
-        <p>Explore voices by language, region and speaking style.</p>
-    </div>
+<div class="heading">
+<h2>Voice Library</h2>
+<p>Explore voices by language, region, gender and style.</p>
+</div>
 
-    <div class="coming">
+<div class="grid">
 
-        <div>
-            <div class="coming-icon">🎙</div>
-
-            <h2>Voice Library</h2>
-
-            <p>
-                American, British, Nigerian, Spanish, Latin American
-                and other voice categories will be added here.
-            </p>
-
-            <button class="primary-btn" style="margin-top:22px;">
-                Voice Library — Next Stage
-            </button>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CREATIONS -->
-
-<section class="page" id="creations">
-
-    <div class="section-head">
-        <h2>My Creations</h2>
-        <p>Your saved voices, translations and videos.</p>
-    </div>
-
-    <div class="coming">
-
-        <div>
-            <div class="coming-icon">✦</div>
-
-            <h2>Your creations will appear here</h2>
-
-            <p>
-                Voice clips, translated videos, saved projects and
-                favourites will eventually be stored in this space.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-<div class="toast" id="toast"></div>
-
-<script>
-
-const navButtons = document.querySelectorAll(".nav-btn");
-const pages = document.querySelectorAll(".page");
-
-function openPage(pageName){
-
-    pages.forEach(page=>{
-        page.classList.remove("active");
-    });
-
-    navButtons.forEach(button=>{
-        button.classList.remove("active");
-    });
-
-    const page = document.getElementById(pageName);
-    const button = document.querySelector(`[data-page="${pageName}"]`);
-
-    if(page){
-        page.classList.add("active");
-    }
-
-    if(button){
-        button.classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-}
-
-navButtons.forEach(button=>{
-    button.addEventListener("click",()=>{
-        openPage(button.dataset.page);
-    });
-});
-
-
-/* SCRIPT COUNTER */
-
-const script = document.getElementById("script");
-const counter = document.getElementById("counter");
-
-script.addEventListener("input",()=>{
-    counter.textContent = `${script.value.length} / 5000`;
-});
-
-
-/* SPEED */
-
-const speed = document.getElementById("speed");
-const speedValue = document.getElementById("speedValue");
-
-speed.addEventListener("input",()=>{
-    speedValue.textContent = `${Number(speed.value).toFixed(1)}×`;
-});
-
-
-/* MICROPHONE */
-
-const micBtn = document.getElementById("micBtn");
-
-micBtn.addEventListener("click",()=>{
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    if(!SpeechRecognition){
-        showToast("Speech recognition is not supported by this browser.");
-        return;
-    }
-
-    const recognition = new SpeechRecognition();
-
-    recognition.lang = "en-
+<div class="card">
+<div class="cardIcon">🇺🇸</div>
