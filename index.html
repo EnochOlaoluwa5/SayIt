@@ -364,13 +364,35 @@ document.getElementById("generate").onclick=function(){
   return;
  }
 
- document.getElementById("result").classList.add("show");
+ if(!window.speechSynthesis){
+  alert("Speech is not supported on this browser.");
+  return;
+ }
+
+ speechSynthesis.cancel();
+
+ var speech=new SpeechSynthesisUtterance(text.value);
+
+ speech.lang=language.value;
+ speech.rate=parseFloat(speed.value);
+
+ speech.onstart=function(){
+  document.getElementById("result").textContent="🔊 SayIt is speaking...";
+  document.getElementById("result").classList.add("show");
+ };
+
+ speech.onend=function(){
+  document.getElementById("result").textContent="✅ Voice created successfully.";
+ };
+
+ speech.onerror=function(){
+  document.getElementById("result").textContent="❌ SayIt could not create the voice.";
+  document.getElementById("result").classList.add("show");
+ };
+
+ speechSynthesis.speak(speech);
 
 };
-
-
-document.getElementById("mic").onclick=function(){
-
  var Recognition=
   window.SpeechRecognition ||
   window.webkitSpeechRecognition;
