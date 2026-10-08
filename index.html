@@ -1,1213 +1,933 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SayIt — Speak. Transform. Create.</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="description" content="SayIt — Speak. Translate. Connect.">
+  <title>SayIt — Speak. Translate. Connect.</title>
 
-<style>
-*{box-sizing:border-box}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body{
- margin:0;
- background:#08090d;
- color:#fff;
- font-family:Arial,sans-serif
-}
+    :root {
+      --bg: #080a0f;
+      --panel: #11141b;
+      --panel2: #171b24;
+      --border: #272d38;
+      --text: #f5f7fb;
+      --muted: #9299a8;
+      --accent: #6c63ff;
+      --accent2: #8b84ff;
+      --danger: #ff5d6c;
+      --success: #35d07f;
+    }
 
-button,select,textarea,input{font:inherit}
-button{cursor:pointer}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-header{
- padding:16px 20px;
- border-bottom:1px solid #292c38;
- display:flex;
- justify-content:space-between;
- background:#0b0c11;
- position:sticky;
- top:0;
- z-index:5
-}
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
 
-.logo{
- font-size:24px;
- font-weight:bold
-}
+    button {
+      cursor: pointer;
+    }
 
-.logo span{
- color:#7c5cff
-}
+    /* HEADER */
 
-nav{
- display:flex;
- gap:5px;
- overflow:auto;
- padding:10px;
- background:#0b0c11;
- border-bottom:1px solid #292c38
-}
+    header {
+      height: 68px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 10, 15, 0.94);
+      backdrop-filter: blur(12px);
+    }
 
-nav button{
- background:none;
- border:0;
- color:#999;
- padding:10px 13px;
- border-radius:9px;
- white-space:nowrap
-}
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
 
-nav button.active,
-nav button:hover{
- background:#1b1d27;
- color:white
-}
+    .logo span {
+      color: var(--accent2);
+    }
 
-main{
- max-width:1000px;
- margin:auto;
- padding:30px 15px
-}
+    .header-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-.page{display:none}
-.page.active{display:block}
+    .header-btn {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 9px 13px;
+      border-radius: 10px;
+    }
 
-.hero{
- text-align:center;
- padding:50px 10px
-}
+    /* LAYOUT */
 
-.hero h1{
- font-size:clamp(42px,9vw,75px);
- margin:0 0 20px
-}
+    .app {
+      display: flex;
+      min-height: calc(100vh - 68px);
+    }
 
-.hero span{color:#7c5cff}
+    aside {
+      width: 245px;
+      border-right: 1px solid var(--border);
+      padding: 18px 12px;
+      flex-shrink: 0;
+    }
 
-.hero p{
- color:#999;
- line-height:1.7;
- max-width:650px;
- margin:auto
-}
+    .nav-title {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 10px 12px;
+    }
 
-.actions{
- margin-top:25px;
- display:flex;
- gap:10px;
- justify-content:center;
- flex-wrap:wrap
-}
+    nav button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: left;
+      margin-bottom: 4px;
+      transition: 0.2s;
+    }
 
-.primary,
-.secondary{
- padding:13px 18px;
- border-radius:10px;
- border:0;
- color:white
-}
+    nav button:hover,
+    nav button.active {
+      background: var(--panel2);
+      color: white;
+    }
 
-.primary{background:#7c5cff}
+    nav button.active {
+      border-left: 3px solid var(--accent);
+    }
 
-.secondary{
- background:#171923;
- border:1px solid #292c38
-}
+    main {
+      flex: 1;
+      padding: 28px;
+      max-width: 1500px;
+      margin: auto;
+      width: 100%;
+    }
 
-.grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:15px
-}
+    .page {
+      display: none;
+    }
 
-.card,
-.panel{
- background:#11131a;
- border:1px solid #292c38;
- border-radius:16px;
- padding:20px
-}
+    .page.active {
+      display: block;
+    }
 
-.card p,
-.heading p{
- color:#999;
- line-height:1.6
-}
+    /* HOME */
 
-.heading{
- margin-bottom:20px
-}
+    .hero {
+      padding: 35px 0 28px;
+    }
 
-.heading h2{
- font-size:30px;
- margin-bottom:5px
-}
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 65px);
+      line-height: 1;
+      max-width: 800px;
+      letter-spacing: -2px;
+    }
 
-.studio{
- display:grid;
- grid-template-columns:1.2fr .8fr;
- gap:15px
-}
+    .hero h1 span {
+      color: var(--accent2);
+    }
 
-textarea{
- width:100%;
- min-height:260px;
- background:#090b10;
- color:white;
- border:1px solid #292c38;
- border-radius:12px;
- padding:15px;
- resize:vertical
-}
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+      margin-top: 20px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
 
-.controls{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px
-}
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
 
-.field{
- margin-bottom:13px
-}
+    .primary {
+      background: var(--accent);
+      color: white;
+      border: 0;
+      padding: 13px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
 
-label{
- display:block;
- color:#999;
- font-size:12px;
- margin-bottom:6px
-}
+    .secondary {
+      background: var(--panel);
+      color: white;
+      border: 1px solid var(--border);
+      padding: 13px 18px;
+      border-radius: 10px;
+    }
 
-select{
- width:100%;
- padding:11px;
- background:#090b10;
- color:white;
- border:1px solid #292c38;
- border-radius:9px
-}
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 25px;
+    }
 
-input[type=range]{
- width:100%;
- accent-color:#7c5cff
-}
+    .feature-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 15px;
+      min-height: 150px;
+    }
 
-.generate{
- width:100%;
- margin-top:15px
-}
+    .feature-icon {
+      font-size: 27px;
+      margin-bottom: 16px;
+    }
 
-.result{
- display:none;
- margin-top:15px;
- padding:12px;
- background:#0b0d12;
- border:1px solid #292c38;
- border-radius:10px;
- color:#aaa
-}
+    .feature-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
 
-.result.show{display:block}
+    .feature-card p {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 13px;
+    }
 
-.status{
- margin-top:12px;
- color:#999;
- font-size:13px;
- line-height:1.5
-}
+    /* GENERAL */
 
-.audioBox{
- display:none;
- margin-top:15px;
- padding:15px;
- background:#0b0d12;
- border:1px solid #292c38;
- border-radius:12px
-}
+    .page-heading {
+      margin-bottom: 22px;
+    }
 
-.audioBox.show{display:block}
+    .page-heading h2 {
+      font-size: 30px;
+    }
 
-audio{
- width:100%
-}
+    .page-heading p {
+      color: var(--muted);
+      margin-top: 8px;
+    }
 
-.download{
- display:none;
- width:100%;
- margin-top:10px
-}
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
 
-.download.show{display:block}
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
 
-.voiceInfo{
- margin-top:10px;
- color:#888;
- font-size:12px
-}
+    label {
+      display: block;
+      color: #cdd1da;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
 
-.placeholder{
- padding:80px 20px;
- text-align:center;
- background:#11131a;
- border:1px solid #292c38;
- border-radius:16px
-}
+    textarea,
+    input,
+    select {
+      width: 100%;
+      background: #0c0f15;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+    }
 
-.placeholder p{
- color:#999;
- line-height:1.6
-}
+    textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 1.5;
+    }
 
-@media(max-width:700px){
+    textarea:focus,
+    input:focus,
+    select:focus {
+      border-color: var(--accent);
+    }
 
- .grid,
- .studio,
- .controls{
-  grid-template-columns:1fr
- }
+    .field {
+      margin-bottom: 15px;
+    }
 
- header{
-  padding:14px
- }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
 
-}
-</style>
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .mic {
+      background: #191d26;
+      color: white;
+      border: 1px solid var(--border);
+      padding: 11px 14px;
+      border-radius: 10px;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+      min-height: 20px;
+    }
+
+    .result {
+      margin-top: 18px;
+      display: none;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* UPLOAD */
+
+    .upload-box {
+      border: 1px dashed #3a4150;
+      border-radius: 15px;
+      padding: 40px 20px;
+      text-align: center;
+      background: #0c0f15;
+    }
+
+    .upload-box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .upload-box p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .preview-video,
+    .preview-image {
+      display: none;
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-top: 15px;
+      background: black;
+    }
+
+    /* VOICE LIBRARY */
+
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .voice-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .voice-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--panel2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .voice-card h3 {
+      font-size: 15px;
+    }
+
+    .voice-card p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .voice-card button {
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    /* CELEBRITY */
+
+    .celebrity-note {
+      background: #17131b;
+      border: 1px solid #3a2c45;
+      color: #cfc4d7;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .celebrity-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .celebrity-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .celebrity-card h3 {
+      font-size: 15px;
+    }
+
+    .celebrity-card p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .availability {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #e5c77b;
+    }
+
+    /* CREATIONS */
+
+    .creation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .creation {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 17px;
+    }
+
+    .creation-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .creation h3 {
+      font-size: 15px;
+    }
+
+    .creation p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 1000px) {
+      .feature-grid,
+      .voice-grid,
+      .celebrity-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .creation-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding: 0 14px;
+      }
+
+      .header-right {
+        display: none;
+      }
+
+      .app {
+        display: block;
+      }
+
+      aside {
+        width: 100%;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 8px;
+        overflow-x: auto;
+      }
+
+      nav {
+        display: flex;
+        gap: 5px;
+        min-width: max-content;
+      }
+
+      nav button {
+        width: auto;
+        margin: 0;
+        padding: 9px 11px;
+        white-space: nowrap;
+      }
+
+      nav button.active {
+        border-left: 0;
+        border-bottom: 2px solid var(--accent);
+      }
+
+      .nav-title {
+        display: none;
+      }
+
+      main {
+        padding: 18px 13px 40px;
+      }
+
+      .hero {
+        padding-top: 18px;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      .feature-grid,
+      .voice-grid,
+      .celebrity-grid,
+      .creation-grid,
+      .grid-2,
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .page-heading h2 {
+        font-size: 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
- <div class="logo">Say<span>It</span></div>
- <small style="color:#777">Platform online</small>
+  <div class="logo">Say<span>It</span></div>
+
+  <div class="header-right">
+    <button class="header-btn" onclick="openPage('studio')">Voice Studio</button>
+    <button class="header-btn" onclick="openPage('creations')">My Creations</button>
+  </div>
 </header>
 
-<nav>
- <button class="active" data-page="home">Home</button>
- <button data-page="studio">Voice Studio</button>
- <button data-page="video">Video</button>
- <button data-page="translate">Translate</button>
- <button data-page="library">Voice Library</button>
- <button data-page="creations">My Creations</button>
-</nav>
+<div class="app">
 
-<main>
+  <aside>
+    <div class="nav-title">SayIt</div>
 
-<section id="home" class="page active">
+    <nav>
+      <button class="active" onclick="openPage('home', this)">⌂ Home</button>
+      <button onclick="openPage('studio', this)">🎙️ Voice Studio</button>
+      <button onclick="openPage('video', this)">🎬 Video</button>
+      <button onclick="openPage('translate', this)">🌍 Translate</button>
+      <button onclick="openPage('library', this)">🎧 Voice Library</button>
+      <button onclick="openPage('celebrity', this)">⭐ Celebrity Voices</button>
+      <button onclick="openPage('creations', this)">📁 My Creations</button>
+    </nav>
+  </aside>
 
- <div class="hero">
+  <main>
 
-  <h1>
-   Speak.<br>
-   <span>Transform. Create.</span>
-  </h1>
+    <!-- HOME -->
 
-  <p>
-   A global voice and media platform for speech,
-   translation, voice transformation and video.
-  </p>
+    <section id="home" class="page active">
 
-  <div class="actions">
+      <div class="hero">
+        <h1>Speak.<br><span>Translate.</span><br>Connect.</h1>
 
-   <button class="primary"
-    onclick="openPage('studio')">
-    Open Voice Studio
-   </button>
+        <p>
+          SayIt is being built as a voice, translation and real-media
+          communication platform. Speak, translate, create voice content
+          and work with video from one place.
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary" onclick="openPage('studio')">
+            Open Voice Studio
+          </button>
+
+          <button class="secondary" onclick="openPage('video')">
+            Translate a Video
+          </button>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">🎙️</div>
+          <h3>Voice Studio</h3>
+          <p>Create speech from text or microphone input with language,
+          voice and style controls.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Translation</h3>
+          <p>Translate spoken or written communication into another language.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎬</div>
+          <h3>Video Translator</h3>
+          <p>Upload real video and prepare it for translated audio and
+          future lip-sync processing.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⭐</div>
+          <h3>Celebrity Voices</h3>
+          <p>Dedicated space for celebrity voices that are legally licensed
+          or authorized for use.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- VOICE STUDIO -->
+
+    <section id="studio" class="page">
+
+      <div class="page-heading">
+        <h2>Voice Studio</h2>
+        <p>Create speech from text and prepare your voice project.</p>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="panel">
+
+          <div class="field">
+            <label>Text</label>
+
+            <textarea id="voiceText"
+              placeholder="Type what you want SayIt to speak..."></textarea>
+          </div>
+
+          <div class="button-row">
+            <button class="mic" id="micButton">🎤 Speak</button>
+            <button class="secondary" onclick="clearText()">Clear</button>
+          </div>
+
+          <div id="micStatus" class="status"></div>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="controls">
+
+            <div class="field">
+              <label>Language</label>
+
+              <select id="language">
+                <option>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+                <option>Portuguese</option>
+                <option>German</option>
+                <option>Italian</option>
+                <option>Arabic</option>
+                <option>Chinese</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Yoruba</option>
+                <option>Igbo</option>
+                <option>Hausa</option>
+              </select>
+            </div>
 
-   <button class="secondary"
-    onclick="openPage('video')">
-    Video Translator
-   </button>
+            <div class="field">
+              <label>Gender</label>
 
-  </div>
+              <select id="gender">
+                <option>Female</option>
+                <option>Male</option>
+              </select>
+            </div>
 
- </div>
+            <div class="field">
+              <label>Accent / Region</label>
 
- <div class="grid">
+              <select id="accent">
+                <option>American</option>
+                <option>British</option>
+                <option>Nigerian</option>
+                <option>International</option>
+                <option>Spanish</option>
+                <option>French</option>
+                <option>Latin American</option>
+              </select>
+            </div>
 
-  <div class="card">
-   <h3>🎙️ Voice Studio</h3>
-   <p>Create natural speech directly in your browser.</p>
-  </div>
+            <div class="field">
+              <label>Style</label>
+
+              <select id="style">
+                <option>Natural</option>
+                <option>Friendly</option>
+                <option>Professional</option>
+                <option>Calm</option>
+                <option>Excited</option>
+                <option>Serious</option>
+                <option>Warm</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label>Speed</label>
+            <input id="speed" type="range" min="0.7" max="1.3"
+              value="1" step="0.05">
+          </div>
+
+          <div class="button-row">
+            <button class="primary" onclick="createVoice()">
+              Create Voice
+            </button>
+
+            <button class="secondary" onclick="previewVoice()">
+              Preview
+            </button>
+          </div>
+
+          <div id="studioStatus" class="status"></div>
+
+          <div id="voiceResult" class="result panel">
+            <strong>Voice output</strong>
+            <p id="resultText" class="status"></p>
+
+            <audio id="audioPlayer" controls></audio>
+
+            <div class="button-row">
+              <button class="secondary" onclick="downloadAudio()">
+                Download
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
 
-  <div class="card">
-   <h3>🎬 Video</h3>
-   <p>Translate and dub real videos.</p>
-  </div>
+
+    <!-- VIDEO -->
+
+    <section id="video" class="page">
+
+      <div class="page-heading">
+        <h2>Video Translator</h2>
+        <p>Upload a real video and prepare it for translation and dubbing.</p>
+      </div>
 
-  <div class="card">
-   <h3>🌍 Global Voices</h3>
-   <p>Different voices, accents and styles.</p>
-  </div>
+      <div class="grid-2">
 
- </div>
+        <div class="panel">
 
-</section>
+          <div class="upload-box">
+            <strong>Upload your video</strong>
+            <p>MP4, MOV, WebM and other supported formats.</p>
+
+            <input id="videoInput" type="file" accept="video/*">
+          </div>
+
+          <video id="videoPreview" class="preview-video" controls></video>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="field">
+            <label>Original language</label>
 
-
-<section id="studio" class="page">
-
- <div class="heading">
-
-  <h2>Voice Studio</h2>
-
-  <p>
-   Generate real audio with the SayIt voice engine.
-  </p>
-
- </div>
-
-
- <div class="studio">
-
-  <div class="panel">
-
-   <h3>Your message</h3>
-
-   <textarea
-    id="text"
-    placeholder="Type what you want SayIt to say..."></textarea>
-
-   <br><br>
-
-   <button class="secondary" id="mic">
-    🎙 Speak
-   </button>
-
-  </div>
-
-
-  <div class="panel">
-
-   <h3>Voice settings</h3>
-
-   <div class="controls">
-
-    <div class="field">
-
-     <label>Language</label>
-
-     <select id="language">
-
-      <option value="en-US">
-       English — US
-      </option>
-
-      <option value="en-GB">
-       English — UK
-      </option>
-
-     </select>
-
-    </div>
-
-
-    <div class="field">
-
-     <label>Gender</label>
-
-     <select id="gender">
-
-      <option value="female">
-       Female
-      </option>
-
-      <option value="male">
-       Male
-      </option>
-
-     </select>
-
-    </div>
-
-
-    <div class="field">
-
-     <label>Accent</label>
-
-     <select id="accent">
-
-      <option value="american">
-       American
-      </option>
-
-      <option value="british">
-       British
-      </option>
-
-     </select>
-
-    </div>
-
-
-    <div class="field">
-
-     <label>Voice</label>
-
-     <select id="voice">
-
-      <option value="af_heart">
-       American Female — Heart
-      </option>
-
-      <option value="af_bella">
-       American Female — Bella
-      </option>
-
-      <option value="af_nicole">
-       American Female — Nicole
-      </option>
-
-      <option value="af_sarah">
-       American Female — Sarah
-      </option>
-
-      <option value="af_sky">
-       American Female — Sky
-      </option>
-
-      <option value="am_adam">
-       American Male — Adam
-      </option>
-
-      <option value="am_michael">
-       American Male — Michael
-      </option>
-
-      <option value="bf_emma">
-       British Female — Emma
-      </option>
-
-      <option value="bf_isabella">
-       British Female — Isabella
-      </option>
-
-      <option value="bm_george">
-       British Male — George
-      </option>
-
-      <option value="bm_lewis">
-       British Male — Lewis
-      </option>
-
-     </select>
-
-    </div>
-
-   </div>
-
-
-   <div class="field">
-
-    <label>Style</label>
-
-    <select id="style">
-
-     <option>Natural</option>
-     <option>Friendly</option>
-     <option>Professional</option>
-     <option>Calm</option>
-     <option>Excited</option>
-
-    </select>
-
-   </div>
-
-
-   <div class="field">
-
-    <label>
-     Speed:
-     <span id="speedValue">1.0x</span>
-    </label>
-
-    <input
-     id="speed"
-     type="range"
-     min=".6"
-     max="1.5"
-     step=".1"
-     value="1">
-
-   </div>
-
-
-   <button
-    class="secondary"
-    id="preview">
-
-    ▶ Preview
-
-   </button>
-
-
-   <button
-    class="primary generate"
-    id="generate">
-
-    Create Voice
-
-   </button>
-
-
-   <div id="result" class="result">
-    Voice engine ready.
-   </div>
-
-
-   <div id="status" class="status">
-    SayIt voice engine has not been loaded yet.
-   </div>
-
-
-   <div id="audioBox" class="audioBox">
-
-    <audio id="audio" controls></audio>
-
-    <button
-     id="download"
-     class="secondary download">
-
-     ⬇ Download WAV
-
-    </button>
-
-   </div>
-
-
-   <div class="voiceInfo">
-    Powered by Kokoro open-source TTS running locally in your browser.
-   </div>
-
-  </div>
-
- </div>
-
-</section>
-
-
-<section id="video" class="page">
-
- <div class="heading">
-
-  <h2>Video Translator</h2>
-
-  <p>
-   Translate real video while keeping the original footage.
-  </p>
-
- </div>
-
- <div class="placeholder">
-
-  <h2>🎬 Video Translator</h2>
-
-  <p>
-   The video engine will be connected after
-   Voice Studio is working.
-  </p>
-
- </div>
-
-</section>
-
-
-<section id="translate" class="page">
-
- <div class="heading">
-
-  <h2>Translation</h2>
-
-  <p>
-   Translate text and speech between languages.
-  </p>
-
- </div>
-
- <div class="placeholder">
-
-  <h2>🌍 Translation Studio</h2>
-
-  <p>
-   The translation engine will be connected next.
-  </p>
-
- </div>
-
-</section>
-
-
-<section id="library" class="page">
-
- <div class="heading">
-
-  <h2>Voice Library</h2>
-
-  <p>
-   Explore different voice types.
-  </p>
-
- </div>
-
- <div class="grid">
-
-  <div class="card">
-   <h3>🇺🇸 American</h3>
-   <p>Male and female voices.</p>
-  </div>
-
-  <div class="card">
-   <h3>🇬🇧 British</h3>
-   <p>British voice styles.</p>
-  </div>
-
-  <div class="card">
-   <h3>🌎 Global</h3>
-   <p>More languages and regions will be added.</p>
-  </div>
-
-  <div class="card">
-   <h3>🎙️ Natural</h3>
-   <p>Natural conversational voices.</p>
-  </div>
-
-  <div class="card">
-   <h3>🎧 Professional</h3>
-   <p>Clear presentation voices.</p>
-  </div>
-
-  <div class="card">
-   <h3>❤️ Friendly</h3>
-   <p>Warm conversational voices.</p>
-  </div>
-
- </div>
-
-</section>
-
-
-<section id="creations" class="page">
-
- <div class="heading">
-
-  <h2>My Creations</h2>
-
-  <p>
-   Your saved work will appear here.
-  </p>
-
- </div>
-
- <div class="placeholder">
-
-  <h2>✨ Nothing here yet</h2>
-
-  <p>
-   Your voices, translations and videos
-   will appear here.
-  </p>
-
- </div>
-
-</section>
-
-</main>
-
-
-<script type="module">
-
-import { KokoroTTS }
-from "https://cdn.jsdelivr.net/npm/kokoro-js@1.2.1/+esm";
-
-
-/* ---------------------------
-   PAGE NAVIGATION
---------------------------- */
-
-function openPage(name){
-
- document.querySelectorAll(".page").forEach(function(page){
-
-  page.classList.remove("active");
-
- });
-
- document.querySelectorAll("nav button").forEach(function(button){
-
-  button.classList.remove("active");
-
- });
-
- var page=document.getElementById(name);
-
- if(page){
-  page.classList.add("active");
- }
-
- var button=document.querySelector(
-  'nav button[data-page="'+name+'"]'
- );
-
- if(button){
-  button.classList.add("active");
- }
-
- window.scrollTo(0,0);
-
-}
-
-window.openPage=openPage;
-
-
-document.querySelectorAll("nav button").forEach(function(button){
-
- button.onclick=function(){
-
-  openPage(this.dataset.page);
-
- };
-
-});
-
-
-/* ---------------------------
-   ELEMENTS
---------------------------- */
-
-var text=document.getElementById("text");
-var language=document.getElementById("language");
-var gender=document.getElementById("gender");
-var accent=document.getElementById("accent");
-var voice=document.getElementById("voice");
-var style=document.getElementById("style");
-var speed=document.getElementById("speed");
-
-var speedValue=document.getElementById("speedValue");
-
-var result=document.getElementById("result");
-var status=document.getElementById("status");
-
-var audioBox=document.getElementById("audioBox");
-var audio=document.getElementById("audio");
-var download=document.getElementById("download");
-
-var tts=null;
-var currentAudioUrl=null;
-var loadingPromise=null;
-
-
-/* ---------------------------
-   SPEED DISPLAY
---------------------------- */
-
-speed.oninput=function(){
-
- speedValue.textContent=
-  parseFloat(speed.value).toFixed(1)+"x";
-
-};
-
-
-/* ---------------------------
-   VOICE SELECT
---------------------------- */
-
-function updateVoiceFromSettings(){
-
- var selectedGender=gender.value;
- var selectedAccent=accent.value;
-
- if(selectedAccent==="british"){
-
-  if(selectedGender==="female"){
-   voice.value="bf_emma";
-  }else{
-   voice.value="bm_george";
-  }
-
- }else{
-
-  if(selectedGender==="female"){
-   voice.value="af_heart";
-  }else{
-   voice.value="am_adam";
-  }
-
- }
-
-}
-
-gender.onchange=updateVoiceFromSettings;
-accent.onchange=updateVoiceFromSettings;
-
-
-/* ---------------------------
-   LOAD KOKORO
---------------------------- */
-
-async function loadVoiceEngine(){
-
- if(tts){
-  return tts;
- }
-
- if(loadingPromise){
-  return loadingPromise;
- }
-
- status.textContent=
-  "⏳ Loading SayIt voice engine... The first load may take a while.";
-
- result.textContent=
-  "Loading voice engine...";
-
- result.classList.add("show");
-
- loadingPromise=(async function(){
-
-  try{
-
-   var device="wasm";
-
-   if(
-    "gpu" in navigator &&
-    navigator.gpu
-   ){
-
-    try{
-
-     var adapter=
-      await navigator.gpu.requestAdapter();
-
-     if(adapter){
-      device="webgpu";
-     }
-
-    }catch(error){
-
-     device="wasm";
-
-    }
-
-   }
-
-
-   status.textContent=
-    "⏳ Loading Kokoro using "+
-    device.toUpperCase()+
-    "...";
-
-
-   tts=await KokoroTTS.from_pretrained(
-    "onnx-community/Kokoro-82M-v1.0-ONNX",
-    {
-     dtype:device==="webgpu"?"fp32":"q8",
-     device:device,
-     progress_callback:function(progress){
-
-      if(progress){
-
-       var value=
-        progress.progress;
-
-       if(
-        typeof value==="number" &&
-        isFinite(value)
-       ){
-
-        status.textContent=
-         "⏳ Loading voice engine: "+
-         Math.round(value)+"%";
-
-       }
-
-      }
-
-     }
-    }
-   );
-
-
-   status.textContent=
-    "✅ Voice engine ready.";
-
-   result.textContent=
-    "✅ SayIt voice engine is ready.";
-
-   result.classList.add("show");
-
-   return tts;
-
-  }catch(error){
-
-   console.error(error);
-
-   tts=null;
-
-   status.textContent=
-    "❌ Voice engine could not load.";
-
-   result.textContent=
-    "❌ " +
-    (error && error.message
-     ? error.message
-     : "Could not load the voice engine.");
-
-   result.classList.add("show");
-
-   throw error;
-
-  }finally{
-
-   loadingPromise=null;
-
-  }
-
- })();
-
- return loadingPromise;
-
-}
-
-
-/* ---------------------------
-   GENERATE AUDIO
---------------------------- */
-
-async function createVoice(){
-
- var message=text.value.trim();
-
- if(!message){
-
-  alert("Please enter some text first.");
-
-  return;
-
- }
-
- var selectedVoice=voice.value;
-
- var selectedSpeed=
-  parseFloat(speed.value);
-
-
- try{
-
-  result.textContent=
-   "⏳ Preparing SayIt...";
-
-  result.classList.add("show");
-
-  status.textContent=
-   "⏳ Starting voice engine...";
-
-  var engine=await loadVoiceEngine();
-
-
-  result.textContent=
-   "🔊 Generating your voice...";
-
-  status.textContent=
-   "⏳ Creating natural speech...";
-
-
-  var generated=
-   await engine.generate(
-    message,
-    {
-     voice:selectedVoice,
-     speed:selectedSpeed
-    }
-   );
-
-
-  var blob=
-   generated.toBlob();
-
-  if(currentAudioUrl){
-
-   URL.revokeObjectURL(currentAudioUrl);
-
-  }
-
-  currentAudioUrl=
-   URL.createObjectURL(blob);
-
-
-  audio.src=currentAudioUrl;
-
-  audioBox.classList.add("show");
-
-  download.classList.add("show");
-
-  download.onclick=function(){
-
-   var link=document.createElement("a");
-
-   link.href=currentAudioUrl;
-
-   link.download=
-    "sayit-"+Date.now()+".wav";
-
-   document.body.appendChild(link);
-
-   link.click();
-
-   link.remove();
-
-  };
-
-
-  result.textContent=
-   "✅ Voice created successfully.";
-
-  status.textContent=
-   "Your audio is ready.";
-
-  audio.play().catch(function(){
-
-   status.textContent=
-    "✅ Audio created. Tap the Play button to hear it.";
-
-  });
-
-
- }catch(error){
-
-  console.error(error);
-
-  result.textContent=
-   "❌ Voice generation failed.";
-
-  status.textContent=
-   error && error.message
-    ? error.message
-    : "Something went wrong while generating the audio.";
-
- }
-
-}
-
-
-/* ---------------------------
-   CREATE VOICE
---------------------------- */
-
-document.getElementById("generate").onclick=
- createVoice;
-
-
-/* ---------------------------
-   PREVIEW
---------------------------- */
-
-document.getElementById("preview").onclick=
- createVoice;
-
-
-/* ---------------------------
-   MICROPHONE
---------------------------- */
-
-document.getElementById("mic").onclick=
-function(){
-
- var Recognition=
-  window.SpeechRecognition ||
-  window.webkitSpeechRecognition;
-
- if(!Recognition){
-
-  alert(
-   "Voice recognition is not available in this browser yet."
-  );
-
-  return;
-
- }
-
- var recognition=
-  new Recognition();
-
- recognition.lang=
-  language.value;
-
- recognition.interimResults=false;
-
- recognition.continuous=false;
-
- status.textContent=
-  "🎙 Listening...";
-
-
- recognition.onresult=
- function(event){
-
-  if(
-   event.results &&
-   event.results[0] &&
-   event.results[0][0]
-  ){
-
-   text.value=
-    event.results[0][0].transcript;
-
-   status.textContent=
-    "✅ Speech captured.";
-
-  }
-
- };
-
-
- recognition.onerror=
- function(event){
-
-  console.error(event);
-
-  status.textContent=
-   "❌ Microphone recognition failed.";
-
- };
-
-
- recognition.onend=
- function(){
-
-  if(
-   !text.value.trim()
-  ){
-
-   status.textContent=
-    "Microphone stopped.";
-
-  }
-
- };
-
-
- try{
-
-  recognition.start();
-
- }catch(error){
-
-  console.error(error);
-
-  status.textContent=
-   "❌ Could not start the microphone.";
-
- }
-
-};
-
-
-/* ---------------------------
-   INITIAL MESSAGE
---------------------------- */
-
-status.textContent=
- "Ready. Tap Create Voice to load the free voice engine.";
-
-</script>
-
-</body>
-   </html>
+            <select>
+              <option>Detect automatically</option>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>Portuguese</option>
+              <option>Yoruba</option>
+              <option>Igbo</option>
+              <option>Hausa</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Target language</label>
+
+            <select>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>Portuguese</option>
+              <option>Yoruba</option>
+              <option>Igbo</option>
+              <option>Hausa</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Voice</label>
+
+            <select>
+              <option>Natural Female</option>
+              <option>Natural Male</option>
+              <option>American Male</option>
+              <option>American Female</option>
+              <option>British Male</option>
+              <option>British Female</option>
+              <option>Nigerian Male</option>
+              <option>Nigerian Female</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Video processing</label>
+
+            <select>
+              <option>Translated audio</option>
+              <option>Translated audio + timing</option>
+              <option>Translated audio + lip-sync</option>
+            </select>
+          </div>
+
+          <button class="primary" onclick="prepareVideo()">
+            Prepare Translation
+          </button>
+
+          <div id="videoStatus" class="status"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRANSLATE -->
+
+    <section id="translate" class="page">
+
+      <div class="page-heading">
+        <h2>Translate</h2>
+        <p>Translate text between languages.</p>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="panel">
+
+          <div class="field">
+            <label>From</label>
+
+            <select>
+              <option>Auto detect</option>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>Portuguese</option>
+              <option>Yoruba</option>
+              <option>Igbo</option>
+              <option>Hausa</option>
+            </select>
+          </div>
+
+          <textarea id="translateInput"
+            placeholder="Enter text to translate..."></textarea>
+
+        </div>
+
+        <div class="panel">
+
+          <div class="field">
+            <label>To</label>
+
+            <select>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>Portuguese</option>
+              <option>Yoruba</option>
+              <option>Igbo</option>
+              <option>Hausa</option>
+            </select>
+          </div>
+
+          <textarea id="translateOutput"
+            placeholder="Translation will appear here..."
+            readonly></textarea>
+
+          <div class="button-row">
+            <button class="primary" onclick="translateText()">
+              Translate
+            </button>
+
+            <button class="secondary" onclick="copyTranslation()">
+              Copy
+            </button>
+          </div>
+
+ 
